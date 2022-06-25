@@ -27,7 +27,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Say hello"
+          name: "Say world"
           command: "echo World!"
 
 # Invoke jobs via workflows
@@ -37,5 +37,6 @@ workflows:
     jobs:
       - say-hello
       - say-world:
-          - say-hello
+          requires:
+            - say-hello
 
