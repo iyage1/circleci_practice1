@@ -17,7 +17,7 @@ jobs:
       - run:  mkdir workspace 
       - run:  echo "empty file" > /home/circleci/project/workspace/file.txt
       - run:   cd  /home/circleci/project/workspace
-      - run:  ls -a
+      - run:  ls -a  /home/circleci/project/workspace
       - run:  "echo Hello, World!"
 
 # Invoke jobs via workflows
