@@ -19,10 +19,10 @@ jobs:
           command: mkdir -p  work_space
       - run:
           name: "save to work space"
-          command: echo "text to output here" > output.txt
+          command: echo "text to output here" > /work_space/output.txt
       - persist_to_workspace:
           root: work_space
-          path: output.txt
+          paths: output.txt
 
   print_output_file:
     executor: my-executor
