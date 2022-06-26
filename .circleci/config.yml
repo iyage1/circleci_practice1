@@ -13,10 +13,10 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run: pwd
+      - run:  pwd
       - run:  mkdir workspace 
       - run:  echo "empty file" > /home/circleci/project/workspacefile.txt
-      -run: cd workspace
+      - run:   cd workspace
       - run:  ls -a
       - run:  "echo Hello, World!"
 
