@@ -13,8 +13,9 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
+      - run: pwd
       - run:  mkdir workspace 
-      - run:  cd workspace
+      - run:  cd tmp/workspace
       - run:  echo "empty file" > file.txt
       - run:  ls -a
       - run:  "echo Hello, World!"
