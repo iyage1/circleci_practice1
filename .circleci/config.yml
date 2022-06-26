@@ -5,7 +5,7 @@ executors:
   my-executor:
     docker:
       - image: circleci/node:13.8.0
-  working_directory: /temp
+  working_directory: /tmp
 jobs:
   save_hello_world_output:
     executor: my-executor
@@ -13,6 +13,7 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
+      - run: rm -rf  /home/circleci/project/work_space
       - run:
           name: create new dir work_space
           command: mkdir -p  work_space
