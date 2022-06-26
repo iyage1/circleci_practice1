@@ -1,12 +1,13 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/2.0/configuration-reference
+- version: 2.1
 executors:
   my-executor:
     docker:
       - image: circleci/node:13.8.0
   working_directory: /temp
 jobs:
-   save_hello_world_output:
+  save_hello_world_output:
       executor: my-executor
       steps:
         - checkout
@@ -20,7 +21,6 @@ jobs:
               work_space
             path:
               output.txt
-
   print_output_file:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     executor: my-executor
