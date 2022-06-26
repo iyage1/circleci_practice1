@@ -19,7 +19,7 @@ jobs:
       - persist_to_workspace:
           root: work_space
           path: output.txt
-  print_output_file:
+  print_output_file :
     executor: my-executor
     steps:
       - attach_workspace:
