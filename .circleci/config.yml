@@ -2,43 +2,58 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+executors:
+  my-executor:
+    docker:
+      - image: circleci/node:13.8.0
+  working_directory: /temp
+
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
+   save_hello_world_output:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: circleci/node:13.8.0
+     executor: my-executor
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: echo $MY_ENV_VAR_NAME,
-  say-world:
+          name: "print to text-file"
+          command: cd /tmp
+          command: mkdir work_space
+          command: echo text to output here > output.txt
+      - persist_to_workspace:
+          root:
+            work_space
+          path:
+             output.txt
+
+  print_output_file:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    executor: my-executor
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: circleci/node:13.8.0
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
+      - attach_workspace:
+        at: /tmpwork_space
       - run:
           name: "Say world"
-          command: "echo World!"
+          command: cat /tmp/work_space/output.txt
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflow
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
-      - say-world:
+      - save_hello_world_output
+      -  print_output_file:
           requires:
-            - say-hello
+            - save_hello_world_output
 
 
 
