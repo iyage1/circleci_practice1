@@ -14,12 +14,16 @@ jobs:
     steps:
       - checkout
       - run:
+          name: create new dir work_space
+          command: mkdir -p  work_space
+      - run:
           name: "save to work space"
           command: echo "text to output here" > output.txt
       - persist_to_workspace:
           root: work_space
           path: output.txt
-  print_output_file :
+
+  print_output_file:
     executor: my-executor
     steps:
       - attach_workspace:
@@ -33,5 +37,5 @@ workflows:
   say-hello-workflow:
     jobs:
       - save_hello_world_output
-         print_output_file:
+      - print_output_file:
           requires: save_hello_world_output
