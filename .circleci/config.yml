@@ -27,4 +27,4 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - ssave_hello_world_output
+      - save_hello_world_output
