@@ -15,8 +15,8 @@ jobs:
       - checkout
       - run: pwd
       - run:  mkdir workspace 
-      - run:  cd tmp/workspace
-      - run:  echo "empty file" > file.txt
+      - run:  echo "empty file" > /home/circleci/project/workspacefile.txt
+      -run: cd workspace
       - run:  ls -a
       - run:  "echo Hello, World!"
 
