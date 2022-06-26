@@ -1,48 +1,23 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/2.0/configuration-reference
-- version: 2.1
-executors:
-  my-executor:
-    docker:
-      - image: circleci/node:13.8.0
-  working_directory: /temp
+version: 2.1
 jobs:
-  save_hello_world_output:
-      executor: my-executor
-      steps:
-        - checkout
-        - run:
-            name: "print to text-file"
-            command: cd /tmp
-            command: mkdir work_space
-            command: echo text to output here > output.txt
-        - persist_to_workspace:
-            root:
-              work_space
-            path:
-              output.txt
-  print_output_file:
+  say-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    executor: my-executor
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/base:stable
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - attach_workspace:
-        at: /tmpwork_space
       - run:
-          name: "Say world"
-          command: cat /tmp/work_space/output.txt
+          name: "Say hello"
+          command: "echo Hello, World!"
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      - save_hello_world_output
-      -  print_output_file:
-          requires:
-            - save_hello_world_output
-
-
-
-
-
+      - say-hello
