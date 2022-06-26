@@ -15,13 +15,18 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command: 
+          commands: 
               - cd /tmp
-              - mkdir workspace 
-              - cd workspace
-              - echo "empty file" > file.txt
-              - ls -a
-              - "echo Hello, World!"
+              -| 
+                mkdir workspace 
+              -| 
+                cd workspace
+              -| 
+                echo "empty file" > file.txt
+              -| 
+                ls -a
+              -| 
+                "echo Hello, World!"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
